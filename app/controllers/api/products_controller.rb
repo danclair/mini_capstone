@@ -4,21 +4,6 @@ class Api::ProductsController < ApplicationController
     render "all_products.json.jb"
   end
 
-  def one_hoodie_action
-    @one_hoodie = Product.find_by(id: 1)
-    render "one_hoodie.json.jb"
-  end
-
-  def one_socks_action
-    @one_socks = Product.find_by(id: 2)
-    render "one_socks.json.jb"
-  end
-
-  def one_pants_action
-    @one_pants = Product.find_by(id: 3)
-    render "one_pants.json.jb"
-  end
-
   def all_product_names_action
     @all_products = Product.all
     @all_product_names = []
@@ -28,5 +13,11 @@ class Api::ProductsController < ApplicationController
       index += 1
     end
     render "all_product_names.json.jb"
+  end
+
+  def any_product_action
+    input_product = params["product_id"]
+    @any_product = Product.find_by(id: input_product)
+    render "any_product.json.jb"
   end
 end
