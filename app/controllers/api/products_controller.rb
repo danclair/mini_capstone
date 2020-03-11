@@ -1,6 +1,15 @@
 class Api::ProductsController < ApplicationController
   def index
     @products = Product.all
+
+    if params[:search]
+      @products = @products.where("name ILIKE ?", "%#{params[:search]}%")
+    end
+
+    # @products = @products.order(:id => :asc)
+
+    # @products = @products.order(:price => :desc)
+
     render "index.json.jb"
   end
 
@@ -23,11 +32,11 @@ class Api::ProductsController < ApplicationController
   def update
     @product = Product.find_by(id: params[:id])
     @product.name = params[:name] || @product.name
-    @product.price = params[:price] || @product.name
+    @product.price = params[:price] || @product.price
     @product.image_url = params[:image_url] || @product.image_url
     @product.description = params[:description] || @product.description
     @product.category = params[:category] || @product.category
-    @photo.save
+    @product.save
     render "show.json.jb"
   end
 
