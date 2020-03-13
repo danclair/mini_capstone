@@ -5,7 +5,7 @@
   tax: product.tax,
   total: product.total,
   is_discounted: product.is_discounted?,
-  image_url: product.image_url,
+  images: product.images,
   description: product.description,
   formatted: {
     price: number_to_currency(product.price),
